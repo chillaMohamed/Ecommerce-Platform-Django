@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %} Signup Successful {% endblock %}
+
+{% block style %}
+    .gradient-btn {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Sunset colors */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .gradient-btn:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f); /* Reverse gradient */
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center align-items-center" >
+    <div class="message-box text-center p-4 border rounded bg-white shadow">
+        <h1 class="display-6 text-success">Welcome!</h1>
+        <p>Your account has been successfully created.</p>
+        {% if USER_ACCOUNT_ACTIVATION_IS_ACTIVE %}
+        <p>Please check your email to activate your account.</p>
+        {% endif %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-dark">Go to Login Page</a>
+    </div>
+</div>
+{% endblock %}

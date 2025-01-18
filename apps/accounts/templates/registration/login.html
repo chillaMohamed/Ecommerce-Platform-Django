@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Login - My eCommerce{% endblock %}
+
+{% block content %}
+     <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Login</h1>
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{ request.user }}
+
+                    <div class="form-group mb-3">
+                        <label for="first_name">Email</label>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="first_name">Password</label>
+                        {{ form.password|add_class:"form-control" }}
+                    </div>
+
+
+                    {% if form.non_field_errors %}
+                        <div style="color: red;">
+                            <ul>
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark px-5">Login</button>
+                    </div>
+                </form>
+                <p>Not registered? <a href="{% url 'accounts:signup' %}">Sign up here</a>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

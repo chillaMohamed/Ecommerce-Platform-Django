@@ -1,0 +1,12 @@
+/* Sticky Footer CSS */
+html, body {
+    height: 100%; /* Ensure full height of the page */
+}
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Full height to push footer */
+}
+#content-wrap {
+    flex: 1; /* Take up remaining space to push footer */
+}
