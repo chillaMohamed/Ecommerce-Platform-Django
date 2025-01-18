@@ -1,5 +1,5 @@
 """
-URL configuration for src project.
+URL configuration for apps project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -14,9 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from apps.accounts.views import (custom_404_view)
+from config import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('apps.accounts.urls', namespace='accounts')),
+    path('home',custom_404_view, name='home' ),
+    path('products',custom_404_view, name='products' ),
+    path('cart',custom_404_view, name='cart' ),
 ]
+
+
+# Add this line to serve static files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Activation - My eCommerce{% endblock %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow p-4 text-center">
+            <div class="card-body">
+                <h1 class="text-danger">Activation Link Invalid</h1>
+                <p class="mt-3">Oops! It seems like the activation link is invalid or has expired.</p>
+                <p>Please check your email for a new activation link or register again if necessary.</p>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-primary mt-3">Go to Signup</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

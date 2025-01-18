@@ -1,0 +1,8 @@
+<p>Hi {{ user.username }},</p>
+<p>Thanks for signing up! Please click the link below to activate your account:</p>
+<p>
+    <a href="http://{{ domain }}{% url 'accounts:activate' uid=uid token=token %}">
+        Activate My Account
+    </a>
+</p>
+<p>If you didn't sign up, you can safely ignore this email.</p>
