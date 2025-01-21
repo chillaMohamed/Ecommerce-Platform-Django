@@ -1,7 +1,7 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_not_required
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth import login
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect, get_object_or_404
@@ -77,7 +77,7 @@ def activate_view(request, uid, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
+        messages.success(request, "your account has been activated")
         return redirect('accounts:login')  # Redirect to the home page after activation
     else:
         return render(request, 'registration/activation_account_invalid.html')

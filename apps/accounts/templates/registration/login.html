@@ -8,22 +8,17 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1 class="text-center">Login</h1>
+                {% include 'includes/notification.html' %}
                 <form method="post">
                     {% csrf_token %}
-
-                    {{ request.user }}
-
                     <div class="form-group mb-3">
                         <label for="first_name">Email</label>
                         {{ form.username|add_class:"form-control" }}
                     </div>
-
                     <div class="form-group mb-3">
                         <label for="first_name">Password</label>
                         {{ form.password|add_class:"form-control" }}
                     </div>
-
-
                     {% if form.non_field_errors %}
                         <div style="color: red;">
                             <ul>
