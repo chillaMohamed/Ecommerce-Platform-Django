@@ -21,11 +21,12 @@ from apps.accounts.views import (custom_404_view)
 from config import settings
 
 urlpatterns = [
+    path('', custom_404_view, name='home'),
+    path('products', custom_404_view, name='products'),
+    path('cart', custom_404_view, name='cart'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls', namespace='accounts')),
-    path('home',custom_404_view, name='home' ),
-    path('products',custom_404_view, name='products' ),
-    path('cart',custom_404_view, name='cart' ),
+
 ]
 
 
