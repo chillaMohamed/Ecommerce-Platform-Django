@@ -20,21 +20,14 @@ def signup_view(request):
     if request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            username = form.cleaned_data['username']
-            country = form.cleaned_data['country']
-            password = form.cleaned_data['password1']
-
             user = CustomUser.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                username=username,
-                email=username,
-                country=country,
-                password=password,
-                is_active=False if getattr(settings, 'USER_ACCOUNT_ACTIVATION', False) else True)
-
+                first_name=form.cleaned_data['first_name'].strip(),
+                last_name=form.cleaned_data['last_name'].strip(),
+                username=form.cleaned_data['username'].strip(),
+                email=form.cleaned_data['username'].strip(),
+                country=form.cleaned_data['country'],
+                password=form.cleaned_data['password1']
+            )
             user.save()
 
             #send vérification email
@@ -47,8 +40,7 @@ def signup_view(request):
                         'user': user,
                         'domain': current_site.domain,
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token': default_token_generator.make_token(user),
-                    }
+                        'token': default_token_generator.make_token(user),}
                 )
                 email = EmailMessage(
                     subject=subject,

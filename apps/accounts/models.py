@@ -15,8 +15,8 @@ COUNTRY_CHOICES = [
     # Add more countries as needed
 ]
 
-def get_user_account_verification_settings():
-    return getattr(settings, 'USER_ACCOUNT_ACTIVATION', False)
+def get_default_user_verification_settings():
+    return not getattr(settings, 'USER_ACCOUNT_ACTIVATION', False)
 
 class CustomUser(AbstractUser):
     # Override the username field to enforce email format
@@ -50,13 +50,12 @@ class CustomUser(AbstractUser):
 
     is_active = models.BooleanField(
         _("active"),
-        default= get_user_account_verification_settings,
+        default= get_default_user_verification_settings,
         help_text=_(
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
         ),
     )
-
 
     @property
     def email(self):
@@ -66,14 +65,15 @@ class CustomUser(AbstractUser):
     def email(self, value):
         self.username = self.__class__.objects.normalize_email(value)
 
-
+    @property
+    def full_name(self):
+        return ("     "+self.first_name+" "+self.last_name).strip().lower()
 
     EMAIL_FIELD = "username"
     REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.username
-
 
     def save(self, *args, **kwargs):
         # Ensure superusers are always active
