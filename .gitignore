@@ -129,3 +129,4 @@ Thumbs.db
 
 # DataBase
 migrations/
+db_configurations/postgres_data/

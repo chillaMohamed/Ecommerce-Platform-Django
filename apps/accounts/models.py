@@ -63,11 +63,11 @@ class CustomUser(AbstractUser):
 
     @email.setter
     def email(self, value):
-        self.username = self.__class__.objects.normalize_email(value)
+        pass
 
     @property
     def full_name(self):
-        return ("     "+self.first_name+" "+self.last_name).strip().lower()
+        return (self.first_name+" "+self.last_name).lower()
 
     EMAIL_FIELD = "username"
     REQUIRED_FIELDS = []

@@ -1,0 +1,3 @@
+CREATE USER ecommerce_admin WITH PASSWORD 'root';
+CREATE DATABASE testDB;
+GRANT ALL PRIVILEGES ON DATABASE testDB TO ecommerce_admin;
