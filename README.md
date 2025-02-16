@@ -1,1 +1,1 @@
-# django-ecommerce
+# Simple Ecommerce Plaforme
